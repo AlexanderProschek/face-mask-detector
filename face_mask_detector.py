@@ -31,13 +31,19 @@ def train_test_split(source, trainPath, testPath, split_size):
 	print("test images without mask:",len(test))
 
   #copying train and test images in seaparate directories
-	makedirs(trainPath)
+	try:
+		makedirs(trainPath)
+	except:
+		pass
 	for trainDataPoint in train: 
 		crnTrainDataPath = source + '/' + trainDataPoint
 		newTrainDataPath =  trainPath + '/' + trainDataPoint
 		copyfile(crnTrainDataPath, newTrainDataPath)
 
-	makedirs(testPath)
+	try:
+		makedirs(testPath)
+	except:
+		pass
 	for testDataPoint in test:
 		crnTestDataPath = source + '/' + testDataPoint
 		newTestDataPath =  testPath + '/' + testDataPoint
