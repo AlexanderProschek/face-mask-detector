@@ -5,7 +5,7 @@ import random
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from os import listdir
+from os import listdir, makedirs
 from shutil import copyfile
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -33,11 +33,13 @@ def train_test_split(source, trainPath, testPath, split_size):
 	print("test images without mask:",len(test))
 
   #copying train and test images in seaparate directories
+	makedirs(trainPath)
 	for trainDataPoint in train: 
 		crnTrainDataPath = source + '/' + trainDataPoint
 		newTrainDataPath =  trainPath + '/' + trainDataPoint
 		copyfile(crnTrainDataPath, newTrainDataPath)
 
+	makedirs(testPath)
 	for testDataPoint in test:
 		crnTestDataPath = source + '/' + testDataPoint
 		newTestDataPath =  testPath + '/' + testDataPoint
