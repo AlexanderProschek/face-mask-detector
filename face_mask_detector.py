@@ -1,11 +1,9 @@
-import os
 import tensorflow as tf
-import shutil
 import random
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from os import listdir, makedirs
+from os import listdir, makedirs, path
 from shutil import copyfile
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -13,16 +11,16 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.utils import shuffle
 
-print("The number of images with facemask:",len(os.listdir('data/with_mask')))
-print("The number of images without facemask:",len(os.listdir('data/without_mask')))
+print("The number of images with facemask:",len(listdir('data/with_mask')))
+print("The number of images without facemask:",len(listdir('data/without_mask')))
 IMG_HEIGHT = 150
 IMG_WIDTH = 150
 
 def train_test_split(source, trainPath, testPath, split_size):
 	dataset = []
-	for crnImage in os.listdir(source):
+	for crnImage in listdir(source):
 		data = source + '/' + crnImage
-		if(os.path.getsize(data) > 0):
+		if(path.getsize(data) > 0):
 			dataset.append(crnImage)
 	train_len = int(len(dataset) * split_size)
 	test_len = int(len(dataset) - train_len)
